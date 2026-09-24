@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f2e9">
+  <title>한글, 만져보기</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <nav class="tabs" aria-label="학습 영역">
+      <button class="tab active" data-tab="jamo">자모 + 만들기</button>
+      <button class="tab" data-tab="read">만들고 읽기</button>
+    </nav>
+
+    <section id="jamo" class="screen active">
+      <div class="poster">
+        <div class="jamo-group">
+          <div id="consonants" class="jamo-grid consonants" aria-label="자음"></div>
+          <div id="vowels" class="jamo-grid vowels" aria-label="모음"></div>
+        </div>
+
+        <section class="builder" aria-label="글자 만들기">
+          <div id="dropZone" class="drop-zone">
+            <div class="cross vertical"></div>
+            <div class="cross horizontal"></div>
+            <div id="placed" class="placed"></div>
+          </div>
+          <div id="result" class="result" aria-live="polite"></div>
+          <button id="listen" class="listen" disabled>듣기</button>
+          <button id="clear" class="clear">다시</button>
+        </section>
+      </div>
+    </section>
+
+    <section id="read" class="screen">
+      <div class="reading">
+        <p class="eyebrow">만들고 읽기</p>
+        <div class="word-card">
+          <div class="word-emoji" id="wordEmoji">🚂</div>
+          <div class="word" id="word">기차</div>
+        </div>
+
+        <div class="word-parts" id="wordParts"></div>
+
+        <div class="mini-builder">
+          <div id="readDropZone" class="drop-zone small">
+            <div class="cross vertical"></div>
+            <div class="cross horizontal"></div>
+            <div id="readPlaced" class="placed"></div>
+          </div>
+          <div id="readResult" class="result"></div>
+          <button id="readListen" class="listen" disabled>듣기</button>
+        </div>
+
+        <button id="nextWord" class="next">다른 단어</button>
+      </div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
