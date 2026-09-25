@@ -151,6 +151,14 @@ if(wordEl) {
   });
 }
 
+const prevBtn = document.querySelector("#prevWord");
+if(prevBtn) {
+  prevBtn.addEventListener("click", () => {
+    wordIndex = (wordIndex - 1 + words.length) % words.length;
+    renderWord();
+  });
+}
+
 const nextBtn = document.querySelector("#nextWord");
 if(nextBtn) {
   nextBtn.addEventListener("click", () => {
@@ -158,6 +166,33 @@ if(nextBtn) {
     renderWord();
   });
 }
+
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQLiLyKKjlys7As-XNJAp_PwUwBl1_zJn0Fp2oDbLLRKoTqAU7Q44NvRTyVbAKZ61SNG68vYGjtINxi/pub?gid=0&single=true&output=csv";
+
+async function loadCustomWords() {
+  try {
+    const res = await fetch(SHEET_URL);
+    if (!res.ok) throw new Error("Network error");
+    const csv = await res.text();
+    const lines = csv.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+    const customWords = [];
+    lines.forEach(line => {
+      const parts = line.split(',');
+      if (parts.length >= 2) {
+        customWords.push({ word: parts[0].trim(), emoji: parts[1].trim() });
+      }
+    });
+    if (customWords.length > 0) {
+      words.length = 0; 
+      words.push(...customWords);
+      wordIndex = 0;
+      renderWord();
+    }
+  } catch(e) {
+    console.log("구글 시트 로드 실패, 기존 단어 유지:", e);
+  }
+}
+loadCustomWords();
 
 const readListenBtn = document.querySelector("#readListen");
 if(readListenBtn) {
