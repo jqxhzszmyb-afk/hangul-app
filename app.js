@@ -125,11 +125,8 @@ function renderWord() {
   wordEl.textContent = item.word;
   
   const emojiEl = document.querySelector("#wordEmoji");
-  if (item.image) {
-    emojiEl.innerHTML = `<img src="${item.image}" alt="${item.word}" style="max-height: 150px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">`;
-  } else {
-    emojiEl.textContent = item.emoji;
-  }
+  emojiEl.innerHTML = '';
+  emojiEl.textContent = item.emoji || '';
   
   const parts = document.querySelector("#wordParts");
   parts.replaceChildren();

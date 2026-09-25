@@ -39,23 +39,23 @@ function composeFinal(base, finalChar) {
 
 const words = [
   // 헬로 카봇
-  {word:"차탄", image:"images/차탄.png"},
-  {word:"에이스", image:"images/에이스.png"},
-  {word:"프론", image:"images/프론.png"},
-  {word:"호크", image:"images/호크.png"},
-  {word:"댄디", image:"images/댄디.png"},
-  {word:"스카이", image:"images/스카이.png"},
-  {word:"펜타스톰", image:"images/펜타스톰.png"},
-  {word:"케이캅스", image:"images/케이캅스.png"},
-  {word:"마이티가드", image:"images/마이티가드.png"},
-  {word:"유니크루저", image:"images/유니크루저.png"},
+  {word:"차탄", emoji:"👦🏻"},
+  {word:"에이스", emoji:"🚒"},
+  {word:"프론", emoji:"🚓"},
+  {word:"호크", emoji:"🚗"},
+  {word:"댄디", emoji:"🚑"},
+  {word:"스카이", emoji:"🚁"},
+  {word:"펜타스톰", emoji:"🤖"},
+  {word:"케이캅스", emoji:"👮‍♂️"},
+  {word:"마이티가드", emoji:"🛡️"},
+  {word:"유니크루저", emoji:"🚀"},
   // 포켓몬스터
-  {word:"피카츄", image:"images/피카츄.png"},
-  {word:"파이리", image:"images/파이리.png"},
-  {word:"꼬부기", image:"images/꼬부기.png"},
-  {word:"이상해씨", image:"images/이상해씨.png"},
-  {word:"이브이", image:"images/이브이.png"},
-  {word:"푸린", image:"images/푸린.png"},
-  {word:"잠만보", image:"images/잠만보.png"},
-  {word:"리자몽", image:"images/리자몽.png"}
+  {word:"피카츄", emoji:"⚡️"},
+  {word:"파이리", emoji:"🔥"},
+  {word:"꼬부기", emoji:"🐢"},
+  {word:"이상해씨", emoji:"🍃"},
+  {word:"이브이", emoji:"🦊"},
+  {word:"푸린", emoji:"🎤"},
+  {word:"잠만보", emoji:"💤"},
+  {word:"리자몽", emoji:"🐉"}
 ];
