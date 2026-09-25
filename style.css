@@ -93,6 +93,7 @@ button { font: inherit; cursor: pointer; border: none; }
   justify-content: center;
   transition: transform 0.1s, box-shadow 0.1s;
   user-select: none;
+  touch-action: none;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 0 var(--line), 0 8px 10px var(--shadow);
