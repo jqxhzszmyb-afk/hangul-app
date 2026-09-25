@@ -124,9 +124,7 @@ function renderWord() {
   if(!wordEl) return;
   wordEl.textContent = item.word;
   
-  const emojiEl = document.querySelector("#wordEmoji");
-  emojiEl.innerHTML = '';
-  emojiEl.textContent = item.emoji || '';
+
   
   const parts = document.querySelector("#wordParts");
   parts.replaceChildren();
