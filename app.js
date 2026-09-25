@@ -177,7 +177,7 @@ async function loadCustomWords() {
     const lines = csv.split('\n').map(line => line.trim()).filter(line => line.length > 0);
     const customWords = [];
     lines.forEach(line => {
-      const parts = line.split(',');
+      const parts = line.replace(/"/g, '').split(',');
       if (parts.length >= 2) {
         customWords.push({ word: parts[0].trim(), emoji: parts[1].trim() });
       }
