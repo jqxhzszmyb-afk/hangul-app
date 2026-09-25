@@ -167,6 +167,27 @@ if(readListenBtn) {
   });
 }
 
+// --- Syllable Chart ---
+function renderChart() {
+  const grid = document.querySelector("#chartGrid");
+  if (!grid) return;
+  grid.replaceChildren();
+
+  consonants.forEach(c => {
+    vowels.forEach(v => {
+      const char = syllableMap[c[0] + v[0]];
+      if (char) {
+        const btn = document.createElement("button");
+        btn.className = "chart-cell";
+        btn.textContent = char;
+        btn.addEventListener("click", () => speak(char));
+        grid.appendChild(btn);
+      }
+    });
+  });
+}
+renderChart();
+
 // --- Tabs ---
 document.querySelectorAll(".tab").forEach(tab => {
   tab.addEventListener("click", () => {

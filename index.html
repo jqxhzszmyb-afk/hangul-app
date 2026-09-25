@@ -24,6 +24,7 @@
   <main class="app">
     <nav class="tabs" aria-label="학습 영역">
       <button class="tab active" data-tab="jamo">자모 조합</button>
+      <button class="tab" data-tab="chart">가나다 표</button>
       <button class="tab" data-tab="read">단어 읽기</button>
       <button class="tab" data-tab="draw">직접 쓰기</button>
     </nav>
@@ -44,6 +45,13 @@
           <button id="listen" class="listen" disabled>소리 듣기</button>
           <button id="clear" class="clear">지우기</button>
         </section>
+      </div>
+    </section>
+
+    <section id="chart" class="screen">
+      <div class="chart-container">
+        <p class="eyebrow">글자를 누르면 소리가 나요</p>
+        <div id="chartGrid" class="chart-grid"></div>
       </div>
     </section>
 

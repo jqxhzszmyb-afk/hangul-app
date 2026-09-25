@@ -267,3 +267,32 @@ canvas {
   height: 100%;
   cursor: crosshair;
 }
+
+/* Syllable Chart */
+.chart-container {
+  background: var(--tile);
+  border-radius: 30px;
+  padding: 30px;
+  text-align: center;
+  overflow-x: auto;
+}
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(40px, 1fr));
+  gap: 8px;
+  margin-top: 20px;
+  min-width: 600px;
+}
+.chart-cell {
+  background: #fff;
+  border-radius: 12px;
+  font-size: 1.8rem;
+  padding: 10px 0;
+  color: var(--ink);
+  box-shadow: 0 3px 0 var(--line), 0 5px 8px var(--shadow);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+.chart-cell:active {
+  transform: translateY(3px);
+  box-shadow: 0 0px 0 var(--line), 0 2px 4px var(--shadow);
+}
