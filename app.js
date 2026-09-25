@@ -184,14 +184,19 @@ if (canvas) {
   let isDrawing = false;
 
   const resize = () => {
-    canvas.width = canvas.parentElement.clientWidth;
-    canvas.height = canvas.parentElement.clientHeight;
-    ctx.lineCap = "round";
-    ctx.lineJoin = "round";
-    ctx.lineWidth = 15;
-    ctx.strokeStyle = "#413b35";
+    if (canvas.parentElement.clientWidth === 0) return;
+    if (canvas.width !== canvas.parentElement.clientWidth || canvas.height !== canvas.parentElement.clientHeight) {
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.lineWidth = 15;
+      ctx.strokeStyle = "#413b35";
+    }
   };
   window.addEventListener('resize', resize);
+  const ro = new ResizeObserver(resize);
+  ro.observe(canvas.parentElement);
   resize();
 
   const getPos = (e) => {
