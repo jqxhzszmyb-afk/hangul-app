@@ -38,10 +38,6 @@ function composeFinal(base, finalChar) {
 }
 
 const words = [
-  // 기본 단어
-  {word:"기차", emoji:"🚂"},
-  {word:"사과", emoji:"🍎"},
-  {word:"바다", emoji:"🌊"},
   // 헬로 카봇
   {word:"차탄", image:"images/차탄.png"},
   {word:"에이스", image:"images/에이스.png"},

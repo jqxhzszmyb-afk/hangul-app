@@ -143,6 +143,14 @@ function renderWord() {
 }
 renderWord();
 
+const wordEl = document.querySelector("#word");
+if(wordEl) {
+  wordEl.style.cursor = "pointer";
+  wordEl.addEventListener("click", () => {
+    speak(wordEl.textContent);
+  });
+}
+
 const nextBtn = document.querySelector("#nextWord");
 if(nextBtn) {
   nextBtn.addEventListener("click", () => {
