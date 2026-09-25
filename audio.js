@@ -12,9 +12,20 @@ function speak(text) {
   );
 
   let speechText = text;
-  if (text === "요") speechText = "요오";
-  // 애플/맥 TTS 엔진이 '갓'을 영어나 약어(카스 등)로 오인식하는 버그 방지 (발음이 같은 '갇'으로 대체)
-  if (text === "갓") speechText = "갇";
+  
+  // 1글자 단독 발음 시 파닉스 튜닝 (이중모음 소리 구분)
+  if (text.length === 1) {
+    const phonicMap = {
+      "요": "요오", "갓": "갇",
+      "쟈": "지야", "져": "지여", "죠": "지요", "쥬": "지유",
+      "챠": "치야", "쳐": "치여", "쵸": "치요", "츄": "치유",
+      "샤": "시야", "셔": "시여", "쇼": "시요", "슈": "시유"
+    };
+    if (phonicMap[text]) speechText = phonicMap[text];
+  } else {
+    // 단어일 경우의 예외 처리
+    if (text === "갓") speechText = "갇";
+  }
 
   const u = new SpeechSynthesisUtterance(speechText);
   u.lang = "ko-KR";
