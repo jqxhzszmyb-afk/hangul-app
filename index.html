@@ -2,16 +2,30 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, viewport-fit=cover">
   <meta name="theme-color" content="#f7f2e9">
-  <title>한글, 만져보기</title>
+  <title>한글 파닉스</title>
+  
+  <!-- 웹폰트: 주아체 (둥글둥글하고 귀여운 폰트) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  
+  <!-- 태블릿(iPad) 웹앱 최적화 메타 태그 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="한글">
+  <link rel="apple-touch-icon" href="pattern.jpg">
+  
   <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
 </head>
 <body>
   <main class="app">
     <nav class="tabs" aria-label="학습 영역">
-      <button class="tab active" data-tab="jamo">자모 + 만들기</button>
-      <button class="tab" data-tab="read">만들고 읽기</button>
+      <button class="tab active" data-tab="jamo">자모 조합</button>
+      <button class="tab" data-tab="read">단어 읽기</button>
+      <button class="tab" data-tab="draw">직접 쓰기</button>
     </nav>
 
     <section id="jamo" class="screen active">
@@ -25,11 +39,10 @@
           <div id="dropZone" class="drop-zone">
             <div class="cross vertical"></div>
             <div class="cross horizontal"></div>
-            <div id="placed" class="placed"></div>
+            <div id="result" class="result" aria-live="polite"></div>
           </div>
-          <div id="result" class="result" aria-live="polite"></div>
-          <button id="listen" class="listen" disabled>듣기</button>
-          <button id="clear" class="clear">다시</button>
+          <button id="listen" class="listen" disabled>소리 듣기</button>
+          <button id="clear" class="clear">지우기</button>
         </section>
       </div>
     </section>
@@ -44,20 +57,29 @@
 
         <div class="word-parts" id="wordParts"></div>
 
-        <div class="mini-builder">
-          <div id="readDropZone" class="drop-zone small">
-            <div class="cross vertical"></div>
-            <div class="cross horizontal"></div>
-            <div id="readPlaced" class="placed"></div>
-          </div>
-          <div id="readResult" class="result"></div>
-          <button id="readListen" class="listen" disabled>듣기</button>
-        </div>
-
         <button id="nextWord" class="next">다른 단어</button>
       </div>
     </section>
+
+    <section id="draw" class="screen">
+      <div class="draw-container">
+        <p class="eyebrow">손가락으로 글자를 써보세요</p>
+        <div class="canvas-wrapper">
+          <canvas id="drawCanvas"></canvas>
+        </div>
+        <button id="clearCanvas" class="clear" style="margin-top:20px;">지우기</button>
+      </div>
+    </section>
   </main>
+  <script src="data.js"></script>
+  <script src="audio.js"></script>
   <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => console.error(err));
+      });
+    }
+  </script>
 </body>
 </html>

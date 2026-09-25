@@ -1,32 +1,10 @@
-const consonants = [
-  ["ㄱ","기역"],["ㄴ","니은"],["ㄷ","디귿"],["ㄹ","리을"],["ㅁ","미음"],["ㅂ","비읍"],["ㅅ","시옷"],
-  ["ㅇ","이응"],["ㅈ","지읒"],["ㅊ","치읓"],["ㅋ","키읔"],["ㅌ","티읕"],["ㅍ","피읖"],["ㅎ","히읗"]
-];
-const vowels = [
-  ["ㅏ","아"],["ㅑ","야"],["ㅓ","어"],["ㅕ","여"],["ㅗ","오"],
-  ["ㅛ","요"],["ㅜ","우"],["ㅠ","유"],["ㅡ","으"],["ㅣ","이"]
-];
 
-const syllableMap = {
-  "ㄱㅏ":"가","ㄱㅑ":"갸","ㄱㅓ":"거","ㄱㅕ":"겨","ㄱㅗ":"고","ㄱㅛ":"교","ㄱㅜ":"구","ㄱㅠ":"규","ㄱㅡ":"그","ㄱㅣ":"기",
-  "ㄴㅏ":"나","ㄴㅑ":"냐","ㄴㅓ":"너","ㄴㅕ":"녀","ㄴㅗ":"노","ㄴㅛ":"뇨","ㄴㅜ":"누","ㄴㅠ":"뉴","ㄴㅡ":"느","ㄴㅣ":"니",
-  "ㄷㅏ":"다","ㄷㅑ":"댜","ㄷㅓ":"더","ㄷㅕ":"뎌","ㄷㅗ":"도","ㄷㅛ":"됴","ㄷㅜ":"두","ㄷㅠ":"듀","ㄷㅡ":"드","ㄷㅣ":"디",
-  "ㄹㅏ":"라","ㄹㅑ":"랴","ㄹㅓ":"러","ㄹㅕ":"려","ㄹㅗ":"로","ㄹㅛ":"료","ㄹㅜ":"루","ㄹㅠ":"류","ㄹㅡ":"르","ㄹㅣ":"리",
-  "ㅁㅏ":"마","ㅁㅑ":"먀","ㅁㅓ":"머","ㅁㅕ":"며","ㅁㅗ":"모","ㅁㅛ":"묘","ㅁㅜ":"무","ㅁㅠ":"뮤","ㅁㅡ":"므","ㅁㅣ":"미",
-  "ㅂㅏ":"바","ㅂㅑ":"뱌","ㅂㅓ":"버","ㅂㅕ":"벼","ㅂㅗ":"보","ㅂㅛ":"뵤","ㅂㅜ":"부","ㅂㅠ":"뷰","ㅂㅡ":"브","ㅂㅣ":"비",
-  "ㅅㅏ":"사","ㅅㅑ":"샤","ㅅㅓ":"서","ㅅㅕ":"셔","ㅅㅗ":"소","ㅅㅛ":"쇼","ㅅㅜ":"수","ㅅㅠ":"슈","ㅅㅡ":"스","ㅅㅣ":"시",
-  "ㅇㅏ":"아","ㅇㅑ":"야","ㅇㅓ":"어","ㅇㅕ":"여","ㅇㅗ":"오","ㅇㅛ":"요","ㅇㅜ":"우","ㅇㅠ":"유","ㅇㅡ":"으","ㅇㅣ":"이",
-  "ㅈㅏ":"자","ㅈㅑ":"쟈","ㅈㅓ":"저","ㅈㅕ":"져","ㅈㅗ":"조","ㅈㅛ":"죠","ㅈㅜ":"주","ㅈㅠ":"쥬","ㅈㅡ":"즈","ㅈㅣ":"지",
-  "ㅊㅏ":"차","ㅊㅑ":"챠","ㅊㅓ":"처","ㅊㅕ":"쳐","ㅊㅗ":"초","ㅊㅛ":"쵸","ㅊㅜ":"추","ㅊㅠ":"츄","ㅊㅡ":"츠","ㅊㅣ":"치",
-  "ㅋㅏ":"카","ㅋㅑ":"캬","ㅋㅓ":"커","ㅋㅕ":"켜","ㅋㅗ":"코","ㅋㅛ":"쿄","ㅋㅜ":"쿠","ㅋㅠ":"큐","ㅋㅡ":"크","ㅋㅣ":"키",
-  "ㅌㅏ":"타","ㅌㅑ":"탸","ㅌㅓ":"터","ㅌㅕ":"텨","ㅌㅗ":"토","ㅌㅛ":"툐","ㅌㅜ":"투","ㅌㅠ":"튜","ㅌㅡ":"트","ㅌㅣ":"티",
-  "ㅍㅏ":"파","ㅍㅑ":"퍄","ㅍㅓ":"퍼","ㅍㅕ":"펴","ㅍㅗ":"포","ㅍㅛ":"표","ㅍㅜ":"푸","ㅍㅠ":"퓨","ㅍㅡ":"프","ㅍㅣ":"피",
-  "ㅎㅏ":"하","ㅎㅑ":"햐","ㅎㅓ":"허","ㅎㅕ":"혀","ㅎㅗ":"호","ㅎㅛ":"효","ㅎㅜ":"후","ㅎㅠ":"휴","ㅎㅡ":"흐","ㅎㅣ":"히"
-};
-
+// --- State ---
 const state = { picked: [] };
 const readState = { picked: [] };
+let wordIndex = 0;
 
+// --- Initialize DOM ---
 function makeJamoButton([char, name], type) {
   const b = document.createElement("button");
   b.className = "jamo";
@@ -42,6 +20,7 @@ function makeJamoButton([char, name], type) {
 document.querySelector("#consonants").replaceChildren(...consonants.map(x => makeJamoButton(x, "consonant")));
 document.querySelector("#vowels").replaceChildren(...vowels.map(x => makeJamoButton(x, "vowel")));
 
+// --- Drag & Drop ---
 function startDrag(e) {
   const char = e.currentTarget.dataset.char;
   const type = e.currentTarget.dataset.type;
@@ -49,10 +28,11 @@ function startDrag(e) {
 
   const ghost = document.createElement("div");
   ghost.textContent = char;
+  ghost.className = "jamo ghost";
   ghost.style.cssText = `
     position:fixed; left:${e.clientX}px; top:${e.clientY}px;
-    transform:translate(-50%,-50%); font-size:64px; font-weight:600;
-    z-index:9999; pointer-events:none; color:var(--ink);
+    transform:translate(-50%,-50%); 
+    z-index:9999; pointer-events:none;
   `;
   document.body.appendChild(ghost);
 
@@ -81,24 +61,20 @@ function startDrag(e) {
 }
 
 function addJamo(char, type, targetState, placedSelector, resultSelector) {
-  if (targetState.picked.length >= 3) return;
+  if (targetState.picked.length >= 3) return; // 최대 초/중/종성
   targetState.picked.push({ char, type });
   renderPlaced(targetState, placedSelector);
   updateResult(targetState, resultSelector);
+  
+  // 시각적 애니메이션 피드백
+  const resultEl = document.querySelector(resultSelector);
+  resultEl.classList.remove('pop');
+  void resultEl.offsetWidth; // trigger reflow
+  resultEl.classList.add('pop');
 }
 
 function renderPlaced(s, selector) {
-  const zone = document.querySelector(selector);
-  zone.replaceChildren();
-
-  // 아이가 놓은 순서를 그대로 보여준다.
-  // 예: ㅋ + ㅏ + ㅁ → [ ㅋㅏㅁ ]
-  if (s.picked.length) {
-    const sequence = document.createElement("div");
-    sequence.className = "jamo-sequence";
-    sequence.textContent = s.picked.map(item => item.char).join("");
-    zone.appendChild(sequence);
-  }
+  // UI 통합으로 인해 사용하지 않음
 }
 
 function updateResult(s, selector) {
@@ -109,79 +85,52 @@ function updateResult(s, selector) {
   const final = chars.filter(x => consonants.some(y => y[0] === x))[1];
 
   let word = "";
-  if (c && v) word = syllableMap[c + v] || "";
-  if (c && v && final && word) {
-    word = composeFinal(word, final);
+  if (c && v) {
+    word = syllableMap[c + v] || "";
+    if (final && word) word = composeFinal(word, final);
+  } else if (c) {
+    word = c;
+  } else if (v) {
+    word = v;
   }
+  
   result.textContent = word;
-  const listen = selector === "#result" ? document.querySelector("#listen") : document.querySelector("#readListen");
-  listen.disabled = !word;
+  const listenBtn = selector === "#result" ? document.querySelector("#listen") : document.querySelector("#readListen");
+  if(listenBtn) listenBtn.disabled = !word;
 }
 
-const finalIndex = {"ㄱ":1,"ㄲ":2,"ㄳ":3,"ㄴ":4,"ㄵ":5,"ㄶ":6,"ㄷ":7,"ㄹ":8,"ㄺ":9,"ㄻ":10,"ㄼ":11,"ㄽ":12,"ㄾ":13,"ㄿ":14,"ㅀ":15,"ㅁ":16,"ㅂ":17,"ㅄ":18,"ㅅ":19,"ㅆ":20,"ㅇ":21,"ㅈ":22,"ㅊ":23,"ㅋ":24,"ㅌ":25,"ㅍ":26,"ㅎ":27};
-const cho = {"ㄱ":0,"ㄲ":1,"ㄴ":2,"ㄷ":3,"ㄸ":4,"ㄹ":5,"ㅁ":6,"ㅂ":7,"ㅃ":8,"ㅅ":9,"ㅆ":10,"ㅇ":11,"ㅈ":12,"ㅉ":13,"ㅊ":14,"ㅋ":15,"ㅌ":16,"ㅍ":17,"ㅎ":18};
-const jung = {"ㅏ":0,"ㅐ":1,"ㅑ":2,"ㅒ":3,"ㅓ":4,"ㅔ":5,"ㅕ":6,"ㅖ":7,"ㅗ":8,"ㅘ":9,"ㅙ":10,"ㅚ":11,"ㅛ":12,"ㅜ":13,"ㅝ":14,"ㅞ":15,"ㅟ":16,"ㅠ":17,"ㅡ":18,"ㅢ":19,"ㅣ":20};
-
-function composeFinal(base, finalChar) {
-  const f = finalIndex[finalChar];
-  if (!f) return base;
-  const code = base.codePointAt(0) - 0xAC00;
-  if (code < 0 || code > 11171) return base;
-  const l = Math.floor(code / 588);
-  const v = Math.floor((code % 588) / 28);
-  return String.fromCodePoint(0xAC00 + l*588 + v*28 + f);
+// --- Event Listeners ---
+const listenBtn = document.querySelector("#listen");
+if(listenBtn) {
+  listenBtn.addEventListener("click", () => {
+    const res = document.querySelector("#result").textContent;
+    if(res) speak(res);
+  });
 }
 
-function speak(text) {
-  if (!("speechSynthesis" in window)) {
-    alert("이 기기에서 음성 기능을 사용할 수 없습니다.");
-    return;
-  }
-
-  speechSynthesis.cancel();
-
-  const voices = speechSynthesis.getVoices();
-  const koVoices = voices.filter(v =>
-    v.lang && (v.lang.toLowerCase() === "ko-kr" || v.lang.toLowerCase().startsWith("ko"))
-  );
-
-  // 브라우저마다 고립된 모음의 발음이 달라질 수 있다.
-  // 특히 ㅛ → "여"처럼 들리는 엔진이 있어, 우선 '요.' 형태로 요청한다.
-  // 그래도 엔진 자체가 잘못 읽으면 녹음 음원이 가장 정확한 해결책이다.
-  const speechText = text === "요" ? "요." : text;
-
-  const u = new SpeechSynthesisUtterance(speechText);
-  u.lang = "ko-KR";
-  u.rate = .72;
-  u.pitch = 1.0;
-
-  // 한국어 음성이 여러 개 있으면 첫 번째 한국어 음성을 사용한다.
-  if (koVoices.length) u.voice = koVoices[0];
-
-  speechSynthesis.speak(u);
+const clearBtn = document.querySelector("#clear");
+if(clearBtn) {
+  clearBtn.addEventListener("click", () => {
+    state.picked = [];
+    renderPlaced(state, "#placed");
+    updateResult(state, "#result");
+  });
 }
 
-document.querySelector("#listen").addEventListener("click", () => {
-  document.querySelector("#result").textContent && speak(document.querySelector("#result").textContent);
-});
-document.querySelector("#clear").addEventListener("click", () => {
-  state.picked = [];
-  renderPlaced(state, "#placed");
-  updateResult(state, "#result");
-});
-
-const words = [
-  {word:"기차", emoji:"🚂"},
-  {word:"가방", emoji:"🎒"},
-  {word:"나비", emoji:"🦋"},
-  {word:"고기", emoji:"🍖"}
-];
-let wordIndex = 0;
-
+// --- Read Words ---
 function renderWord() {
   const item = words[wordIndex];
-  document.querySelector("#word").textContent = item.word;
-  document.querySelector("#wordEmoji").textContent = item.emoji;
+  const wordEl = document.querySelector("#word");
+  if(!wordEl) return;
+  wordEl.textContent = item.word;
+  
+  const emojiEl = document.querySelector("#wordEmoji");
+  if (item.image) {
+    emojiEl.innerHTML = `<img src="${item.image}" alt="${item.word}" style="max-height: 150px; border-radius: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">`;
+  } else {
+    emojiEl.textContent = item.emoji;
+  }
+  
   const parts = document.querySelector("#wordParts");
   parts.replaceChildren();
   [...item.word].forEach(ch => {
@@ -194,20 +143,23 @@ function renderWord() {
 }
 renderWord();
 
-document.querySelector("#nextWord").addEventListener("click", () => {
-  wordIndex = (wordIndex + 1) % words.length;
-  readState.picked = [];
-  document.querySelector("#readPlaced").replaceChildren();
-  document.querySelector("#readResult").textContent = "";
-  document.querySelector("#readListen").disabled = true;
-  renderWord();
-});
+const nextBtn = document.querySelector("#nextWord");
+if(nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    wordIndex = (wordIndex + 1) % words.length;
+    renderWord();
+  });
+}
 
-document.querySelector("#readListen").addEventListener("click", () => {
-  const t = document.querySelector("#readResult").textContent;
-  if (t) speak(t);
-});
+const readListenBtn = document.querySelector("#readListen");
+if(readListenBtn) {
+  readListenBtn.addEventListener("click", () => {
+    const t = document.querySelector("#readResult").textContent;
+    if (t) speak(t);
+  });
+}
 
+// --- Tabs ---
 document.querySelectorAll(".tab").forEach(tab => {
   tab.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach(x => x.classList.remove("active"));
@@ -216,3 +168,57 @@ document.querySelectorAll(".tab").forEach(tab => {
     document.querySelector("#" + tab.dataset.tab).classList.add("active");
   });
 });
+
+// --- Canvas Drawing (직접 쓰기) ---
+const canvas = document.getElementById("drawCanvas");
+if (canvas) {
+  const ctx = canvas.getContext("2d");
+  let isDrawing = false;
+
+  const resize = () => {
+    canvas.width = canvas.parentElement.clientWidth;
+    canvas.height = canvas.parentElement.clientHeight;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.lineWidth = 15;
+    ctx.strokeStyle = "#413b35";
+  };
+  window.addEventListener('resize', resize);
+  resize();
+
+  const getPos = (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: clientX - rect.left, y: clientY - rect.top };
+  };
+
+  const start = (e) => {
+    isDrawing = true;
+    const { x, y } = getPos(e);
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    e.preventDefault();
+  };
+  const move = (e) => {
+    if (!isDrawing) return;
+    const { x, y } = getPos(e);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    e.preventDefault();
+  };
+  const end = () => {
+    isDrawing = false;
+  };
+
+  canvas.addEventListener("pointerdown", start);
+  canvas.addEventListener("pointermove", move);
+  window.addEventListener("pointerup", end);
+  canvas.addEventListener("touchstart", start, { passive: false });
+  canvas.addEventListener("touchmove", move, { passive: false });
+  window.addEventListener("touchend", end);
+
+  document.querySelector("#clearCanvas").addEventListener("click", () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });
+}
