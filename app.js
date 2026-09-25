@@ -173,8 +173,8 @@ async function loadCustomWords() {
     const customWords = [];
     lines.forEach(line => {
       const parts = line.replace(/"/g, '').split(',');
-      if (parts.length >= 2) {
-        customWords.push({ word: parts[0].trim(), emoji: parts[1].trim() });
+      if (parts.length >= 1 && parts[0].trim() !== '') {
+        customWords.push({ word: parts[0].trim(), emoji: '' });
       }
     });
     if (customWords.length > 0) {
