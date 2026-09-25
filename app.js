@@ -180,7 +180,11 @@ function renderChart() {
         const btn = document.createElement("button");
         btn.className = "chart-cell";
         btn.textContent = char;
-        btn.addEventListener("click", () => speak(char));
+        btn.addEventListener("click", () => {
+          speak(char);
+          btn.classList.add("pressed");
+          setTimeout(() => btn.classList.remove("pressed"), 300);
+        });
         grid.appendChild(btn);
       }
     });

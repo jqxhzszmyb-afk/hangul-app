@@ -296,3 +296,10 @@ canvas {
   transform: translateY(3px);
   box-shadow: 0 0px 0 var(--line), 0 2px 4px var(--shadow);
 }
+.chart-cell.pressed {
+  background: var(--accent);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px var(--accent);
+  transition: all 0.1s;
+}
