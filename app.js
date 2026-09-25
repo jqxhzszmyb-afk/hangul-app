@@ -185,6 +185,11 @@ async function loadCustomWords() {
     if (customWords.length > 0) {
       words.length = 0; 
       words.push(...customWords);
+      // 단어 순서 랜덤 섞기
+      for (let i = words.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [words[i], words[j]] = [words[j], words[i]];
+      }
       wordIndex = 0;
       renderWord();
     }

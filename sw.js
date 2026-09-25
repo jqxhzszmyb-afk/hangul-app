@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hangul-v6';
+const CACHE_NAME = 'hangul-v7';
 const urlsToCache = [
   './',
   './index.html',
